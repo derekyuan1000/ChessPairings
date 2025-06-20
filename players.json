@@ -1,0 +1,164 @@
+[
+  {
+    "id": 1,
+    "name": "Qixiang Han",
+    "fide_id": "496952",
+    "rating": 2083
+  },
+  {
+    "id": 2,
+    "name": "Denis Dupuis",
+    "fide_id": "452980",
+    "rating": 2061
+  },
+  {
+    "id": 3,
+    "name": "James Thomas",
+    "fide_id": "343404995",
+    "rating": 1938
+  },
+  {
+    "id": 4,
+    "name": "Marvin Gera",
+    "fide_id": "2409992",
+    "rating": 1888
+  },
+  {
+    "id": 5,
+    "name": "Daniel Kitaev",
+    "fide_id": "2409887",
+    "rating": 1881
+  },
+  {
+    "id": 6,
+    "name": "Lindsay Pyun",
+    "fide_id": "483672",
+    "rating": 1865
+  },
+  {
+    "id": 7,
+    "name": "Jainill Vadalia",
+    "fide_id": "2409399",
+    "rating": 1850
+  },
+  {
+    "id": 8,
+    "name": "Zachary Patton",
+    "fide_id": "2411628",
+    "rating": 1705
+  },
+  {
+    "id": 9,
+    "name": "Matthew Willder",
+    "fide_id": "2408538",
+    "rating": 1694
+  },
+  {
+    "id": 10,
+    "name": "Sai Mallick",
+    "fide_id": "2411768",
+    "rating": 1502
+  },
+  {
+    "id": 11,
+    "name": "Suhayl Abdalla",
+    "fide_id": "487627",
+    "rating": 1488
+  },
+  {
+    "id": 12,
+    "name": "Ross Warcup",
+    "fide_id": "2408597",
+    "rating": 1466
+  },
+  {
+    "id": 13,
+    "name": "Nestor Pento",
+    "fide_id": "25866567",
+    "rating": 1451
+  },
+  {
+    "id": 14,
+    "name": "Raghuram Parasur",
+    "fide_id": "2410460",
+    "rating": 1434
+  },
+  {
+    "id": 15,
+    "name": "Lucas Alvarez Garcia de Sola",
+    "fide_id": "2410559",
+    "rating": 1323
+  },
+  {
+    "id": 16,
+    "name": "Isaac McHugh",
+    "fide_id": "343460895",
+    "rating": 1308
+  },
+  {
+    "id": 17,
+    "name": "Raghav Palanivel",
+    "fide_id": "2409313",
+    "rating": 1307
+  },
+  {
+    "id": 18,
+    "name": "Angharad Hunt",
+    "fide_id": "2410087",
+    "rating": 1186
+  },
+  {
+    "id": 19,
+    "name": "Sahana Chakraborty",
+    "fide_id": "25929518",
+    "rating": 1123
+  },
+  {
+    "id": 20,
+    "name": "Mihir Raje",
+    "fide_id": "",
+    "rating": 1085
+  },
+  {
+    "id": 21,
+    "name": "Nyo Mottengad",
+    "fide_id": "343401651",
+    "rating": 1039
+  },
+  {
+    "id": 22,
+    "name": "Anjishnu Bhaduri",
+    "fide_id": "2415640",
+    "rating": 1009
+  },
+  {
+    "id": 23,
+    "name": "Eesha Neelam",
+    "fide_id": "",
+    "rating": 952
+  },
+  {
+    "id": 24,
+    "name": "Coral Cresswell",
+    "fide_id": "2414228",
+    "rating": 892
+  },
+  {
+    "id": 25,
+    "name": "Devom Sharma",
+    "fide_id": "",
+    "rating": 855
+  },
+  {
+    "id": 26,
+    "name": "Elliot Quinn",
+    "fide_id": "",
+    "rating": 1172
+  },
+  {
+    "id": 27,
+    "name": "Harry Smith",
+    "fide_id": "2417960",
+    "rating": 1354
+  }
+]

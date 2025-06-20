@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Swiss Pairings</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Chess Swiss Pairings</h1>
+        <form id="url-form">
+            <label for="tournament-url">Tournament URL:</label>
+            <input type="url" id="tournament-url" name="tournament-url" required>
+            <button type="submit">Load Players</button>
+        </form>
+        <div id="loading-indicator" style="display:none; text-align:center; margin-bottom:20px;">
+            <p>Loading players... This may take a moment.</p>
+        </div>
+        <section>
+            <h2>Current Round Pairings</h2>
+            <table id="pairings-table">
+                <thead>
+                    <tr><th>Board</th><th>White</th><th>Black</th><th>Round</th><th>Result</th></tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <button id="submit-results">Submit Results</button>
+            <button id="next-round">Next Round</button>
+            <button id="prev-round">Previous Round</button>
+            <button id="reset-tournament" style="background:#e74c3c;">Reset Tournament</button>
+        </section>
+        <section>
+            <h2>Standings</h2>
+            <table id="standings-table">
+                <thead>
+                    <tr><th>Rank</th><th>Name</th><th>Score</th><th>Buchholz</th><th>Sonneborn-Berger</th></tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+    </div>
+    <script src="swiss-tournament.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
