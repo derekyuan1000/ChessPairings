@@ -1,0 +1,53 @@
+services:
+  - type: web
+    name: chess-pairings
+    env: node
+    plan: free
+    buildCommand: npm install && pip install requests beautifulsoup4
+    startCommand: node server.js
+    envVars:
+      - key: PORT standings with tiebreak scores.
+
+  Resources
+  Readme
+  Activity
+  Stars
+  0 stars
+  Watchers
+  0 watching
+  Forks
+  0 forks
+  Releases
+  No releases published
+  Create a new release
+  Packages
+  No packages published
+  Publish your first package
+  Languages
+  JavaScript
+  80.8%
+  
+  CSS
+  10.4%
+  
+  HTML
+  5.0%
+  
+  Python
+  3.8%
+  Suggested workflows
+  Based on your tech stack
+  Gulp logo
+  Gulp
+  Build a NodeJS project with npm and gulp.
+  Webpack logo
+  Webpack
+  Build a NodeJS project with npm and webpack.
+  Datadog Synthetics logo
+  Datadog Synthetics
+  Run Datadog Synthetic tests within your GitHub Actions workflow
+  More workflows
+        value: 10000
+    autoDeploy: true
+
+
