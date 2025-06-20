@@ -5,7 +5,7 @@ const SwissTournament = require('./swissTournament');
 const { exec } = require('child_process');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json()); // Add this to parse JSON bodies
