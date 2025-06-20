@@ -2,7 +2,7 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const SwissTournament = require('./swissTournament');
-const { exec } = require('child_process');
+const https = require('https');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -113,28 +113,134 @@ app.post('/api/submit-results', (req, res) => {
   res.json({ success: true });
 });
 
+// Instead of using Python for scraping, implement the scraping in Node.js
 app.post('/api/load-players', (req, res) => {
   const { url } = req.body;
   if (!url) {
     return res.status(400).json({ error: 'No URL provided' });
   }
-  // Run the Python webscraper with the provided URL
-  exec(`python webscraper.py "${url}"`, (error, stdout, stderr) => {
-    if (error) {
-      console.error('Webscraper error:', stderr);
-      return res.status(500).json({ error: 'Failed to scrape players' });
-    }
-    try {
-      // Reload tournament with new players
-      const players = loadPlayers();
-      tournament = new SwissTournament(players);
-      tournament.firstRound();
-      res.json({ success: true });
-    } catch (e) {
-      res.status(500).json({ error: 'Failed to load players' });
-    }
-  });
+
+  // Implement a Node.js version of the webscraper instead of calling Python
+  fetchChessPlayersFromUrl(url)
+    .then(players => {
+      if (players.length > 0) {
+        // Save to players.json
+        fs.writeFileSync(path.join(__dirname, 'players.json'), JSON.stringify(players, null, 2), 'utf-8');
+
+        // Create tournament
+        tournament = new SwissTournament(players);
+        tournament.firstRound();
+        roundsHistory = [JSON.parse(JSON.stringify(tournament.pairings))];
+
+        res.json({ success: true });
+      } else {
+        res.status(400).json({ error: 'No players found in the URL' });
+      }
+    })
+    .catch(error => {
+      console.error('Error scraping data:', error);
+      res.status(500).json({ error: 'Failed to scrape players: ' + error.message });
+    });
 });
+
+// Node.js implementation of chess player data scraping
+function fetchChessPlayersFromUrl(url) {
+  return new Promise((resolve, reject) => {
+    https.get(url, (response) => {
+      let data = '';
+
+      // A chunk of data has been received
+      response.on('data', (chunk) => {
+        data += chunk;
+      });
+
+      // The whole response has been received
+      response.on('end', () => {
+        try {
+          const players = [];
+
+          // Basic HTML parsing using regex (not as robust as BeautifulSoup but works for simple cases)
+          // Find table rows
+          const tableRowRegex = /<tr[^>]*>([\s\S]*?)<\/tr>/gi;
+          const cellRegex = /<td[^>]*>([\s\S]*?)<\/td>/gi;
+
+          let rows = [];
+          let match;
+
+          // Extract rows
+          while ((match = tableRowRegex.exec(data)) !== null) {
+            rows.push(match[1]);
+          }
+
+          // Skip header row
+          rows = rows.slice(1);
+
+          // Process each row
+          rows.forEach((row, idx) => {
+            const cells = [];
+            let cellMatch;
+
+            // Extract cells from this row
+            while ((cellMatch = cellRegex.exec(row)) !== null) {
+              // Remove HTML tags from cell content
+              const cellContent = cellMatch[1].replace(/<[^>]*>/g, '').trim();
+              cells.push(cellContent);
+            }
+
+            if (cells.length >= 3) {
+              // Try to determine which columns contain name and rating
+              let nameIdx = 2; // Default guess
+              let ratingIdx = -1;
+
+              // Look for rating (a number between 1000-3000)
+              for (let i = 0; i < cells.length; i++) {
+                const value = parseInt(cells[i]);
+                if (!isNaN(value) && value >= 1000 && value <= 3000) {
+                  ratingIdx = i;
+                  break;
+                }
+              }
+
+              // Look for a name (longer text with a space)
+              for (let i = 0; i < cells.length; i++) {
+                if (cells[i].length > 5 && cells[i].includes(' ')) {
+                  nameIdx = i;
+                  break;
+                }
+              }
+
+              const name = cells[nameIdx];
+              const rating = ratingIdx >= 0 ? parseInt(cells[ratingIdx]) : 0;
+
+              // Find FIDE ID (a number between 4-8 digits)
+              let fideId = `p${idx+1}`;
+              for (let i = 0; i < cells.length; i++) {
+                if (i !== ratingIdx && /^\d{4,8}$/.test(cells[i])) {
+                  fideId = cells[i];
+                  break;
+                }
+              }
+
+              players.push({
+                id: idx + 1,
+                name,
+                fide_id: fideId,
+                rating: isNaN(rating) ? 0 : rating
+              });
+            }
+          });
+
+          console.log(`Successfully extracted ${players.length} players`);
+          resolve(players);
+        } catch (error) {
+          reject(error);
+        }
+      });
+    }).on('error', (error) => {
+      reject(error);
+    });
+  });
+}
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
