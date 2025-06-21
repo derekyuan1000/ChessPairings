@@ -54,7 +54,7 @@ pip install requests beautifulsoup4
 
 ### Check it out Online
 It may take a few seconds to load the page
-[chess-pairings.derekyuan.co.uk](www.chess-pairings.derekyuan.co.uk)
+[chess-pairings.derekyuan.co.uk](https://www.chess-pairings.derekyuan.co.uk)
 
 ### Starting the Server
 
