@@ -52,6 +52,10 @@ pip install requests beautifulsoup4
 
 ## Usage
 
+### Check it out Online
+It may take a few seconds to load the page
+[chess-pairings.derekyuan.co.uk](www.chess-pairings.derekyuan.co.uk)
+
 ### Starting the Server
 
 Run the following command to start the server:
